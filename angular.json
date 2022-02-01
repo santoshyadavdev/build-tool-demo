@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "projects": {
+    "core": "libs/core",
+    "lib-demo": "apps/lib-demo",
+    "lib-demo-e2e": "apps/lib-demo-e2e"
+  }
+}

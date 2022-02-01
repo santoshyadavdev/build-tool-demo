@@ -1,0 +1,91 @@
+{
+  "projectType": "application",
+  "root": "apps/lib-demo",
+  "sourceRoot": "apps/lib-demo/src",
+  "prefix": "lib-demo-app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/lib-demo",
+        "index": "apps/lib-demo/src/index.html",
+        "main": "apps/lib-demo/src/main.ts",
+        "polyfills": "apps/lib-demo/src/polyfills.ts",
+        "tsConfig": "apps/lib-demo/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/lib-demo/src/favicon.ico", "apps/lib-demo/src/assets"],
+        "styles": ["apps/lib-demo/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/lib-demo/src/environments/environment.ts",
+              "with": "apps/lib-demo/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "lib-demo:build:production"
+        },
+        "development": {
+          "browserTarget": "lib-demo:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "lib-demo:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/lib-demo/src/**/*.ts",
+          "apps/lib-demo/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/lib-demo"],
+      "options": {
+        "jestConfig": "apps/lib-demo/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
